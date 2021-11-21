@@ -1,11 +1,8 @@
-package com.hackathon.userservice;
-
-import javax.persistence.*;
+package com.hackathon.userservice.models;
 
 import lombok.*;
 
-import java.util.List;
-import java.util.Set;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
