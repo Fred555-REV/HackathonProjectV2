@@ -22,6 +22,16 @@ public class TicketController {
         return service.getActiveTickets();
     }
 
+    @GetMapping("/{id}")
+    public Ticket getTicket(@PathVariable Long id) {
+        return service.getTicketByID(id);
+    }
+
+    @GetMapping("/user/{userID}")
+    public List<Ticket> getTicketsByUser(@PathVariable Long userID) {
+        return service.geticketsByUser(userID);
+    }
+
     @PostMapping
     public Ticket addTicket(@RequestBody Ticket ticket) {
         return service.addTicket(ticket);

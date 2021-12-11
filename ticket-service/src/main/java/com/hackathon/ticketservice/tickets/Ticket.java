@@ -11,7 +11,6 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ticket {
@@ -19,7 +18,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private UUID referenceId = UUID.randomUUID();
-    private Long user_id;
+    private Long userID;
     private String department;
     private String status;
     private String title;

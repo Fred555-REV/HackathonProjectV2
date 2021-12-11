@@ -3,6 +3,7 @@ package com.hackathon.userservice.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -22,5 +23,5 @@ public class User {
     private String email;
     private String password;
     private String departments; // general | back | front | both
-    private String[] roles;
+    private Set<String> roles;
 }

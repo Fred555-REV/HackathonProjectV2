@@ -1,6 +1,7 @@
 package com.hackathon.responseservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,9 @@ import java.util.List;
 
 @Service
 public class ResponseService {
+
+    @Value("${ticketservice.path}")
+    private String ticketPath;
 
     @Autowired
     private ResponseRepository repository;
@@ -29,7 +33,7 @@ public class ResponseService {
 
     public Response addResponseToTicket(Long ticket_id, Response response) {
         response.setTicket_id(ticket_id);
-        restTemplate().put("http://tickets-service-fred555-dev.apps.sandbox.x8i5.p1.openshiftapps.com/tickets/"+ticket_id,response);
+        restTemplate().put(ticketPath + "/tickets/" + ticket_id, response);
         return repository.save(response);
     }
 

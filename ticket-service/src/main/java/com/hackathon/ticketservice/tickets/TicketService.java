@@ -2,6 +2,7 @@ package com.hackathon.ticketservice.tickets;
 
 import com.hackathon.ticketservice.responses.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -11,6 +12,10 @@ import java.util.Set;
 
 @Service
 public class TicketService {
+
+    @Value("${responseservice.path}")
+    private String responsePath;
+
     @Autowired
     private TicketRepository repository;
 
@@ -48,7 +53,7 @@ public class TicketService {
         if (!repository.existsById(id))
             throw new TicketNotFound("Ticket with given id Not Found for deletion");
         repository.deleteById(id);
-        restTemplate().delete("http://responses-service-fred555-dev.apps.sandbox.x8i5.p1.openshiftapps.com/responses/" + id, Response.class);
+        restTemplate().delete(responsePath+"/responses/" + id, Response.class);
 
     }
 
@@ -65,5 +70,13 @@ public class TicketService {
             return repository.save(ticket);
         }).orElseThrow(TicketNotFound::new);
 
+    }
+
+    public Ticket getTicketByID(Long id) {
+        return repository.findById(id).orElseThrow(TicketNotFound::new);
+    }
+
+    public List<Ticket> geticketsByUser(Long userID) {
+        return repository.getAllTicketsByUser(userID);
     }
 }
