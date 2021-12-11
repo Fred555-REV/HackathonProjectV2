@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -21,15 +22,15 @@ public class UserController {
 
     @Bean
     private RestTemplate restTemplate() {
-        return restTemplate();
+        return new RestTemplate();
     }
 
     @Autowired
     public UserService service;
 
     @GetMapping("/tickets/{userID}")
-    public ArrayList<?> getTicketsFromUser(Long id) {
-        return restTemplate().getForObject(ticketPath + "/tickets/user/" + id, ArrayList.class);
+    public ArrayList<?> getTicketsFromUser(@PathVariable Long userID) {
+        return restTemplate().getForObject(ticketPath + "/tickets/user/{userID}", ArrayList.class, Map.of("userID",userID));
     }
 
     @GetMapping

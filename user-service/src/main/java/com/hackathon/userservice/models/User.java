@@ -10,7 +10,6 @@ import java.util.UUID;
 @Table(name = "user")
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -23,5 +22,4 @@ public class User {
     private String email;
     private String password;
     private String departments; // general | back | front | both
-    private Set<String> roles;
 }

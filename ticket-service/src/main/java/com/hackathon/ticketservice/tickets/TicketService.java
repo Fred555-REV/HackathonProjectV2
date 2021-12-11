@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -53,7 +54,7 @@ public class TicketService {
         if (!repository.existsById(id))
             throw new TicketNotFound("Ticket with given id Not Found for deletion");
         repository.deleteById(id);
-        restTemplate().delete(responsePath+"/responses/" + id, Response.class);
+        restTemplate().delete(responsePath+"/responses/{id}", Map.of("id",id) );
 
     }
 

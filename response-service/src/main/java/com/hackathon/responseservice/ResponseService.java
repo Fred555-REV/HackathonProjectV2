@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ResponseService {
@@ -33,7 +34,7 @@ public class ResponseService {
 
     public Response addResponseToTicket(Long ticket_id, Response response) {
         response.setTicket_id(ticket_id);
-        restTemplate().put(ticketPath + "/tickets/" + ticket_id, response);
+        restTemplate().put(ticketPath + "/tickets/{id}", response, Map.of("id", ticket_id));
         return repository.save(response);
     }
 
