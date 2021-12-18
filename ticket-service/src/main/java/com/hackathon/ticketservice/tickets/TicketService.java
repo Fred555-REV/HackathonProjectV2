@@ -44,7 +44,6 @@ public class TicketService {
 
     public Ticket addResponse(Long id, Response response) {
         return repository.findById(id).map(ticket -> {
-
             ticket.getResponses().add(response);
             return repository.save(ticket);
         }).orElseThrow(TicketNotFound::new);

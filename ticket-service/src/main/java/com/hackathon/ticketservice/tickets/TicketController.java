@@ -1,9 +1,11 @@
 package com.hackathon.ticketservice.tickets;
 
+import com.hackathon.ticketservice.responses.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/tickets")
@@ -35,6 +37,11 @@ public class TicketController {
     @PostMapping
     public Ticket addTicket(@RequestBody Ticket ticket) {
         return service.addTicket(ticket);
+    }
+
+    @PostMapping("/{id}")
+    public Ticket addResponse(@PathVariable Long id, @RequestBody Response response) {
+        return service.addResponse(id,response);
     }
 
 //TODO send a request to response service with ticket_id
